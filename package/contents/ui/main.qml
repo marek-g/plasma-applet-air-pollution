@@ -52,7 +52,7 @@ Item {
     
     Timer {
         id: airPollutionTimer
-        interval: 1 * 60 * 1000
+        interval: 15 * 60 * 1000
         running: true
         repeat: true
         triggeredOnStart: true
