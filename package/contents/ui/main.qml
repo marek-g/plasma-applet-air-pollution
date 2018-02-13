@@ -4,25 +4,30 @@ import QtQuick.Controls 1.4
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import "../code/airpollution.js" as AirPollution
 
 Item {
 	id: root
 
 	property string stationName: 'Kraków, ul. Bujaka'
-	property string paramCode: 'PM10'
-	property string value: '100.0'
+	property string paramCode: 'PM2.5'
+	property string value: '...'
+	property var norm: 25.0
+	property color alertColor: "Transparent"
 	
 	Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 	Plasmoid.toolTipTextFormat: Text.RichText
 	Plasmoid.backgroundHints: "StandardBackground"
     
-    Plasmoid.compactRepresentation: Item {
-	
+    Plasmoid.compactRepresentation: Rectangle {
+
         anchors.fill: parent
         Layout.preferredWidth: 60
         Layout.maximumWidth: 60
         Layout.preferredHeight: 40
         Layout.maximumHeight: 40
+        
+        color: root.alertColor
         
         ColumnLayout {
             
@@ -43,5 +48,33 @@ Item {
             }
         }
         
+    }
+    
+    Timer {
+        id: airPollutionTimer
+        interval: 1 * 60 * 1000
+        running: true
+        repeat: true
+        triggeredOnStart: true
+        
+        onTriggered: {
+            AirPollution.getValue(root.stationName, root.paramCode, function(res) {
+                var percentage = (res*100.0)/root.norm;
+                if (percentage <= 50.0) {
+                    root.alertColor = "#8000FF00";
+                } else if (percentage <= 100.0) {
+                    root.alertColor = "#80FFFF00";
+                } else if (percentage <= 150.0) {
+                    root.alertColor = "#C0FF8000";
+                } else if (percentage <= 200.0) {
+                    root.alertColor = "#80FF0000";
+                } else if (percentage <= 300.0) {
+                    root.alertColor = "#80FF00FF";
+                } else {
+                    root.alertColor = "#FF000000";
+                }
+                root.value = '' + Math.floor(res) + ' (' + Math.floor(percentage) + '%)';
+            });
+        }
     }
 }
