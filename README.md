@@ -22,3 +22,6 @@ Plasmoid viewer is part of plasma-sdk. Message printing can be done with "consol
 
 ## Supported sources
 - http://api.gios.gov.pl/pjp-api/rest (documentation: http://powietrze.gios.gov.pl/pjp/content/api)
+
+## Screenshots
+![Air Pollution Plasmoid](https://raw.githubusercontent.com/marek-g/plasma-applet-air-pollution/master/plasmoid.png)
