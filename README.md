@@ -1,4 +1,4 @@
-# Bitcoin Price Plasmoid
+# Air Pollution Plasmoid
 
 ## About
 Plasma applet showing the current air pollution for Polish city.
@@ -21,4 +21,4 @@ plasmoidviewer -a package
 Plasmoid viewer is part of plasma-sdk. Message printing can be done with "console.log()" method.
 
 ## Supported sources
-- api.gios.gov.pl/pjp-api/rest (documentation: http://powietrze.gios.gov.pl/pjp/content/api)
+- http://api.gios.gov.pl/pjp-api/rest (documentation: http://powietrze.gios.gov.pl/pjp/content/api)
