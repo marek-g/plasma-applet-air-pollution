@@ -19,32 +19,46 @@ Item {
 	Plasmoid.toolTipTextFormat: Text.RichText
 	Plasmoid.backgroundHints: "StandardBackground"
     
-    Plasmoid.compactRepresentation: Rectangle {
-
+    Plasmoid.compactRepresentation: Item {
+        
         anchors.fill: parent
         Layout.preferredWidth: 60
         Layout.maximumWidth: 60
         Layout.preferredHeight: 40
         Layout.maximumHeight: 40
         
-        color: root.alertColor
+        MouseArea {
+			id: mouseArea
+			anchors.fill: parent
+			hoverEnabled: true
+			onClicked: {
+                action_refresh();
+			}
+		}
         
-        ColumnLayout {
-            
-            anchors.fill: parent
-        
-            PlasmaComponents.Label {
-                text: root.paramCode
-                
-                Layout.fillWidth: true
-                horizontalAlignment: Text.AlignHCenter
-            }
+        Rectangle {
 
-            PlasmaComponents.Label {
-                text: root.value
+            anchors.fill: parent
+            
+            color: root.alertColor
+            
+            ColumnLayout {
                 
-                Layout.fillWidth: true
-                horizontalAlignment: Text.AlignHCenter
+                anchors.fill: parent
+            
+                PlasmaComponents.Label {
+                    text: root.paramCode
+                    
+                    Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
+                }
+
+                PlasmaComponents.Label {
+                    text: root.value
+                    
+                    Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
+                }
             }
         }
         
@@ -58,23 +72,29 @@ Item {
         triggeredOnStart: true
         
         onTriggered: {
-            AirPollution.getValue(root.stationName, root.paramCode, function(res) {
-                var percentage = (res*100.0)/root.norm;
-                if (percentage <= 50.0) {
-                    root.alertColor = "#8000FF00";
-                } else if (percentage <= 100.0) {
-                    root.alertColor = "#80FFFF00";
-                } else if (percentage <= 150.0) {
-                    root.alertColor = "#C0FF8000";
-                } else if (percentage <= 200.0) {
-                    root.alertColor = "#80FF0000";
-                } else if (percentage <= 300.0) {
-                    root.alertColor = "#80FF00FF";
-                } else {
-                    root.alertColor = "#FF000000";
-                }
-                root.value = '' + Math.floor(res) + ' (' + Math.floor(percentage) + '%)';
-            });
+            action_refresh();
         }
     }
+    
+    function action_refresh() {
+		airPollutionTimer.restart();
+        
+        AirPollution.getValue(root.stationName, root.paramCode, function(res) {
+            var percentage = (res*100.0)/root.norm;
+            if (percentage <= 50.0) {
+                root.alertColor = "#8000FF00";
+            } else if (percentage <= 100.0) {
+                root.alertColor = "#80FFFF00";
+            } else if (percentage <= 150.0) {
+                root.alertColor = "#C0FF8000";
+            } else if (percentage <= 200.0) {
+                root.alertColor = "#80FF0000";
+            } else if (percentage <= 300.0) {
+                root.alertColor = "#80FF00FF";
+            } else {
+                root.alertColor = "#FF000000";
+            }
+            root.value = '' + Math.floor(res) + ' (' + Math.floor(percentage) + '%)';
+        });
+	}
 }
