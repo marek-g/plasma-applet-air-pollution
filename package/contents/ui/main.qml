@@ -13,7 +13,9 @@ Item {
 	property string paramCode: 'PM2.5'
 	property string value: '...'
 	property var norm: 25.0
+
 	property color alertColor: "Transparent"
+    property bool isBusy: false
 	
 	Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 	Plasmoid.toolTipTextFormat: Text.RichText
@@ -32,8 +34,14 @@ Item {
 			anchors.fill: parent
 			hoverEnabled: true
 			onClicked: {
-                action_refresh();
+                action_refresh(true);
 			}
+		}
+		
+		BusyIndicator {
+			anchors.fill: parent
+			running: root.isBusy
+			visible: root.isBusy
 		}
         
         Rectangle {
@@ -72,12 +80,17 @@ Item {
         triggeredOnStart: true
         
         onTriggered: {
-            action_refresh();
+            action_refresh(false);
         }
     }
     
-    function action_refresh() {
+    function action_refresh(withBusyIndicator) {
 		airPollutionTimer.restart();
+        
+        if (withBusyIndicator) {
+            root.isBusy = true;
+            console.log("TRUE");
+        }
         
         AirPollution.getValue(root.stationName, root.paramCode, function(res) {
             var percentage = (res*100.0)/root.norm;
@@ -95,6 +108,12 @@ Item {
                 root.alertColor = "#FF000000";
             }
             root.value = '' + Math.floor(res) + ' (' + Math.floor(percentage) + '%)';
+
+            root.isBusy = false;
+            console.log("FALSE");
+        }, function(error) {
+            root.value = "Error";
+            root.isBusy = false;
         });
 	}
 }
