@@ -59,6 +59,7 @@ Item {
                     
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
+                    font.pixelSize: parent.width / parent.height > 3.0 ? parent.height * 0.4 : parent.width / 5.0
                 }
 
                 PlasmaComponents.Label {
@@ -66,6 +67,7 @@ Item {
                     
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignHCenter
+                    font.pixelSize: parent.width / parent.height > 3.0 ? parent.height * 0.4 : parent.width / 5.0
                 }
             }
         }
