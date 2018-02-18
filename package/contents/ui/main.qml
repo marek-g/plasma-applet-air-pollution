@@ -87,8 +87,6 @@ Item {
     }
     
     function action_refresh(withBusyIndicator) {
-		airPollutionTimer.restart();
-        
         if (withBusyIndicator) {
             root.isBusy = true;
             console.log("TRUE");
