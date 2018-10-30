@@ -12,6 +12,11 @@ plasmapkg2 -i package
 
 Use additional `-g` flag to install plasmoid globally, for all users.
 
+## Update
+```
+plasmapkg2 -u package
+```
+
 ## Debugging
 
 ```

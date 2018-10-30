@@ -24,10 +24,10 @@ Item {
     Plasmoid.compactRepresentation: Item {
         
         anchors.fill: parent
+        Layout.minimumWidth: 40
+        Layout.minimumHeight: 25
         Layout.preferredWidth: 60
-        Layout.maximumWidth: 60
         Layout.preferredHeight: 40
-        Layout.maximumHeight: 40
         
         MouseArea {
 			id: mouseArea
@@ -53,21 +53,24 @@ Item {
             ColumnLayout {
                 
                 anchors.fill: parent
+                spacing: 0
             
                 PlasmaComponents.Label {
                     text: root.paramCode
                     
                     Layout.fillWidth: true
+                    Layout.preferredHeight: parent.height / 2.0
                     horizontalAlignment: Text.AlignHCenter
-                    font.pixelSize: parent.width / parent.height > 3.0 ? parent.height * 0.4 : parent.width / 5.0
+                    font.pixelSize: Math.min(parent.height * 0.4, parent.width / 5.0)
                 }
 
                 PlasmaComponents.Label {
                     text: root.value
                     
                     Layout.fillWidth: true
+                    Layout.preferredHeight: parent.height / 2.0
                     horizontalAlignment: Text.AlignHCenter
-                    font.pixelSize: parent.width / parent.height > 3.0 ? parent.height * 0.4 : parent.width / 5.0
+                    font.pixelSize: Math.min(parent.height * 0.4, parent.width / 5.0)
                 }
             }
         }

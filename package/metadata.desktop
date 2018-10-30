@@ -8,7 +8,7 @@ ServiceTypes=Plasma/Applet
 
 X-KDE-PluginInfo-Author=Marek
 X-KDE-PluginInfo-Email=marek@no.mail
-X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Version=1.1
 X-KDE-PluginInfo-Website=https://github.com/marek-g/plasma-applet-air-pollution
 X-KDE-PluginInfo-Category=Utilities
 X-KDE-PluginInfo-Depends=
