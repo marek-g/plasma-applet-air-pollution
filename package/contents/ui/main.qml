@@ -14,7 +14,9 @@ Item {
 	property string value: '...'
 	property var norm: 25.0
 
-	property color alertColor: "Transparent"
+	property color alertColor1: "Transparent"
+	property color alertColor2: "Transparent"
+	property color alertColor3: "Transparent"
     property bool isBusy: false
 	
 	Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
@@ -48,7 +50,12 @@ Item {
 
             anchors.fill: parent
             
-            color: root.alertColor
+            gradient: Gradient {
+				GradientStop { position: 0.0; color: root.alertColor1 }
+				GradientStop { position: 0.33; color: root.alertColor2 }
+				GradientStop { position: 1.0; color: root.alertColor3 }
+				
+			}
             
             ColumnLayout {
                 
@@ -98,17 +105,29 @@ Item {
         AirPollution.getValue(root.stationName, root.paramCode, function(res) {
             var percentage = (res*100.0)/root.norm;
             if (percentage <= 50.0) {
-                root.alertColor = "#8000FF00";
+                root.alertColor1 = "#8000AA00";
+				root.alertColor2 = "#8000FF00";
+				root.alertColor3 = "#8000AA00";
             } else if (percentage <= 100.0) {
-                root.alertColor = "#80FFFF00";
+                root.alertColor1 = "#80AAAA00";
+				root.alertColor2 = "#80FFFF00";
+				root.alertColor3 = "#80AAAA00";
             } else if (percentage <= 150.0) {
-                root.alertColor = "#C0FF8000";
+                root.alertColor1 = "#C0AA5000";
+				root.alertColor2 = "#C0FF8000";
+				root.alertColor3 = "#C0AA5000";
             } else if (percentage <= 200.0) {
-                root.alertColor = "#80FF0000";
+                root.alertColor1 = "#80AA0000";
+				root.alertColor2 = "#80FF0000";
+				root.alertColor3 = "#80AA0000";
             } else if (percentage <= 300.0) {
-                root.alertColor = "#80FF00FF";
+                root.alertColor1 = "#80AA00AA";
+				root.alertColor2 = "#80FF00FF";
+				root.alertColor3 = "#80AA00AA";
             } else {
-                root.alertColor = "#FF000000";
+                root.alertColor1 = "#FF000000";
+				root.alertColor2 = "#FF222222";
+				root.alertColor3 = "#FF000000";
             }
             root.value = '' + Math.floor(res) + ' (' + Math.floor(percentage) + '%)';
 
