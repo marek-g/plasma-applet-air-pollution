@@ -2,7 +2,7 @@
 Name=Air Pollution
 Comment=Shows current air pollution for Polish city.
 
-Icon=contents/icons/airpollution.png
+Icon=/airpollution.png
 Type=Service
 ServiceTypes=Plasma/Applet
 
