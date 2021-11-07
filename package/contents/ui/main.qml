@@ -4,13 +4,14 @@ import QtQuick.Controls 1.4
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import "../code/airpollution.js" as AirPollution
+import "../code/airpollution_airly.js" as AirPollution
 
 Item {
 	id: root
 
-	property string stationName: 'Kraków, ul. Bujaka'
-	property string paramCode: 'PM2.5'
+	property string latitude: '49.9996157206'
+    property string longitude: '19.9660634995'
+	property string paramCode: 'PM25'
 	property string value: '...'
 	property var norm: 25.0
 
@@ -102,7 +103,7 @@ Item {
             console.log("TRUE");
         }
         
-        AirPollution.getValue(root.stationName, root.paramCode, function(res) {
+        AirPollution.getValue(root.latitude, root.longitude, root.paramCode, function(res) {
             var percentage = (res*100.0)/root.norm;
             if (percentage <= 50.0) {
                 root.alertColor1 = "#8000AA00";

@@ -26,7 +26,8 @@ plasmoidviewer -a package
 Plasmoid viewer is part of plasma-sdk. Message printing can be done with "console.log()" method.
 
 ## Supported sources
-- http://api.gios.gov.pl/pjp-api/rest (documentation: http://powietrze.gios.gov.pl/pjp/content/api)
+- Currently: https://airly.org
+- Previously: http://api.gios.gov.pl/pjp-api/rest (documentation: http://powietrze.gios.gov.pl/pjp/content/api)
 
 ## Screenshots
 ![Air Pollution Plasmoid](https://raw.githubusercontent.com/marek-g/plasma-applet-air-pollution/master/plasmoid.png)
