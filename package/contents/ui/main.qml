@@ -41,7 +41,7 @@ PlasmoidItem {
     function action_refresh(withBusyIndicator) {
         if (withBusyIndicator) {
             root.isBusy = true;
-            console.log("TRUE");
+            //console.log("TRUE");
         }
         
         AirPollution.getValue(root.latitude, root.longitude, root.paramCode, function(res) {
@@ -74,7 +74,7 @@ PlasmoidItem {
             root.value = '' + Math.floor(res) + ' (' + Math.floor(percentage) + '%)';
 
             root.isBusy = false;
-            console.log("FALSE");
+            //console.log("FALSE");
         }, function(error) {
             root.value = "Error";
             root.isBusy = false;
