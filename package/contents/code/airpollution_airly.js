@@ -9,7 +9,7 @@ function getValue(latitude, longtitude, paramCode, callbackOk, callbackError) {
         var response = JSON.parse(req.responseText);
         for (var i = 0; i < response.current.values.length; i++) {
             if (response.current.values[i].name === paramCode) {
-                console.log("value: " + response.current.values[i].value);
+                //console.log("value: " + response.current.values[i].value);
                 callbackOk(response.current.values[i].value);
                 return;
             }
@@ -22,8 +22,8 @@ function request(url, callbackOk, callbackError) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = (function (xhr) {
         return function () {
-            console.log(xhr.readyState);
-            console.log("status: " + xhr.status);
+            //console.log(xhr.readyState);
+            //console.log("status: " + xhr.status);
             if (xhr.readyState == 4) {
                 if (xhr.status == 200) {
                     callbackOk(xhr);

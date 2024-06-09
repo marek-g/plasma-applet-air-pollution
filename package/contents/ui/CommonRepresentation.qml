@@ -8,8 +8,6 @@ import org.kde.plasma.components as PlasmaComponents
 
 Item {
     anchors.fill: parent
-    //Layout.minimumWidth: 40
-    //Layout.minimumHeight: 25
     Layout.preferredWidth: 60
     Layout.preferredHeight: 40
 
