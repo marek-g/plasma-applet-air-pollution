@@ -3,12 +3,13 @@ var apiUrl = 'https://airapi.airly.eu/v2/measurements/point?lat={latitude}&lng={
 function getValue(latitude, longtitude, paramCode, callbackOk, callbackError) {
     var url = apiUrl.replace("{latitude}", latitude)
         .replace("{longitude}", longitude)
-        .replace("{key}", "iGhRGoRb7H8sfw6V3Nz0X93ELMyPgUo5");
+        .replace("{key}", "3xeoECM8FDFk5BnNZDWFbu0UOHuRubwN");
 
     request(url, function (req) {
         var response = JSON.parse(req.responseText);
         for (var i = 0; i < response.current.values.length; i++) {
             if (response.current.values[i].name === paramCode) {
+                console.log("value: " + response.current.values[i].value);
                 callbackOk(response.current.values[i].value);
                 return;
             }
